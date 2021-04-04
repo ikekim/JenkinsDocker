@@ -4,4 +4,7 @@ node('docker'){
 	stage('SCM'){
 		checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/ikekim/JenkinsDocker']]]);
 	}
+		stage('build'){
+		dockerImage = docker.build('ikekim/agent-dnc:v$BUILD_NUMBER', './dotnetcore');
+	}
 }
